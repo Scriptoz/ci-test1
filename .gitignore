@@ -4,8 +4,12 @@ coverage
 coverage.json
 typechain
 typechain-types
+**/.DS_Store
 
 # Hardhat files
 cache
 artifacts
 
+# Forge compiler files
+forge-cache/
+out/

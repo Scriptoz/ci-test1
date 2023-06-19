@@ -121,6 +121,8 @@ describe("Lock", function () {
           [owner, lock],
           [lockedAmount, -lockedAmount]
         );
+
+        expect(true).to.be.false;
       });
     });
   });

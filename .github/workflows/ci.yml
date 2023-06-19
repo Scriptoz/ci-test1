@@ -1,0 +1,113 @@
+---
+name: CI
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  test-hardhat:
+    name: TestHardhat
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Test hardhat
+        run: echo Test hardhat
+
+  test-forge:
+    name: TestForge
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Test forge
+        run: echo Test forge
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Lint
+        run: echo Lint
+
+  contracts-size:
+    name: ContractsSize
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: ContractsSize
+        run: echo Contracts size
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs:
+      - test-hardhat
+      - test-forge
+      - lint
+      - contracts-size
+    steps:
+      - name: Build
+        run: echo build
+
+  approve-test:
+    name: Approve Test
+    runs-on: ubuntu-latest
+    needs:
+      - build
+    steps:
+      - name: manual approve
+        run: echo "Manually approved"
+
+  approve-prod:
+    name: Approve Prod
+    runs-on: ubuntu-latest
+    needs:
+      - build
+    steps:
+      - name: manual approve
+        run: echo "Manually approved"
+
+  deploy-test:
+    name: Deploy Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs:
+      - approve-test
+    environment: test
+    steps:
+      - name: Deploy
+        run: echo deploy
+
+  deploy-prod:
+    name: Deploy Prod
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs:
+      - approve-prod
+    environment: prod
+    steps:
+      - name: Deploy
+        run: echo deploy
+
+  set-version-test:
+    name: Set Version Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs:
+      - deploy-test
+    steps:
+      - name: SetVersion
+        run: echo set version
+
+  set-version-prod:
+    name: Set Version Prod
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs:
+      - deploy-prod
+    steps:
+      - name: SetVersion
+        run: echo set version

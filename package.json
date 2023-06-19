@@ -8,6 +8,7 @@
   },
   "scripts": {
     "lint:check": "npx prettier --check 'contracts/**/*.sol' 'test/**/*.sol' 'test/**/*.ts'",
-    "lint:format": "npx prettier --write 'contracts/**/*.sol' 'test/**/*.sol' 'test/**/*.ts'"
+    "lint:format": "npx prettier --write 'contracts/**/*.sol' 'test/**/*.sol' 'test/**/*.ts'",
+    "test:hardhat": "npx hardhat clean && npx hardhat compile && npx hardhat test"
   }
 }

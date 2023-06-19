@@ -24,12 +24,25 @@ jobs:
         run: npm run test:hardhat
 
   test-forge:
-    name: TestForge
+    name: Forge Test
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Test forge
-        run: echo Test forge
+      - uses: actions/checkout@v3
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+
+      - name: Run Forge build
+        run: |
+          forge --version
+          forge build
+
+      - name: Run Forge tests
+        run: |
+          forge test -vvv
 
   lint:
     name: Lint

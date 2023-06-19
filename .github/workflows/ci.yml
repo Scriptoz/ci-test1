@@ -61,12 +61,20 @@ jobs:
         run: npm run lint:check
 
   contracts-size:
-    name: ContractsSize
+    name: Contracts Size
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: ContractsSize
-        run: echo Contracts size
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install modules
+        run: npm install
+
+      - name: Check sizes
+        run: npm run test:hardhat
 
   build:
     name: Build

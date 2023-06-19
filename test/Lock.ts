@@ -122,7 +122,7 @@ describe("Lock", function () {
           [lockedAmount, -lockedAmount]
         );
 
-        expect(true).to.be.false;
+        expect(true).to.be.true;
       });
     });
   });

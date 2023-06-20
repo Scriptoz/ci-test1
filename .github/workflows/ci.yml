@@ -157,8 +157,23 @@ jobs:
       - approve-test
     environment: test
     steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install modules
+        run: npm install
+
+      - name: Load build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: contract-artifacts
+
       - name: Deploy
-        run: echo deploy
+        run: npm run deploy
+        env:
+          DEPLOY_CONFIG_PATH: environments/test.yml
         
 
   deploy-prod:

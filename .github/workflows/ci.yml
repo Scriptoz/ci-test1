@@ -140,7 +140,10 @@ jobs:
     name: Approve Prod
     runs-on: ubuntu-latest
     needs:
-      - build
+      - test-hardhat
+      - test-forge
+      - lint
+      - contracts-size
     steps:
       - name: manual approve
         run: echo "Manually approved"

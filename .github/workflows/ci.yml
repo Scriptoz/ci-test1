@@ -23,13 +23,13 @@ jobs:
       - name: Build
         run: npm run build
       
-      - name: Save build artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: contract-artifacts
-          path: |
-            artifacts
-            cache/*.json
+      # - name: Save build artifacts
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: contract-artifacts
+      #     path: |
+      #       artifacts
+      #       cache/*.json
 
 
   test-hardhat:
@@ -47,10 +47,10 @@ jobs:
       - name: Install modules
         run: npm install
 
-      - name: Load build artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: contract-artifacts
+      # - name: Load build artifacts
+      #   uses: actions/download-artifact@v3
+      #   with:
+      #     name: contract-artifacts
 
       - name: Test
         run: npm run test:hardhat
@@ -122,10 +122,10 @@ jobs:
       - name: Install modules
         run: npm install
 
-      - name: Load build artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: contract-artifacts
+      # - name: Load build artifacts
+      #   uses: actions/download-artifact@v3
+      #   with:
+      #     name: contract-artifacts
 
       - name: Check sizes
         run: npm run check-size

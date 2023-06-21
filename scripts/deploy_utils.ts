@@ -26,6 +26,8 @@ interface ContractDeployParams {
 }
   
 export async function deployEnvironment(config: any) {
+  console.log(`Deployment to ${config.name} has been started`);
+
   for (const library of config.libraries) {
     if (!library.address) {
       library.address = await deployLibrary(library.factory);
@@ -51,6 +53,8 @@ export async function deployEnvironment(config: any) {
       libraries,
     });
   }
+
+  console.log(`Deployment to ${config.name} has been finished`);
 }
 
 export async function deployLibrary(libraryFactoryName: string): Promise<string> {
@@ -64,6 +68,8 @@ export async function deployLibrary(libraryFactoryName: string): Promise<string>
   );
 
   const library = await libraryFactory.deploy();
+
+  console.log(`Library ${libraryFactoryName} has been deployed to ${library.address}`);
 
   return library.address;
 }
@@ -85,7 +91,7 @@ export async function deployContract(data: ContractDeployParams) {
   console.log("Libraries:", libraries);
 
   ////////////////////// Admin must be check this settings before run the script ////////////////////////
-  await keypress();
+  // await keypress();
 
   // Contract factory param
   let factoryParam = {};

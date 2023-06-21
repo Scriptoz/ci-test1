@@ -9,7 +9,7 @@ contract LockTest is Test {
     Lock lock;
 
     function setUp() public {
-        lock = new Lock(100000000000);
+        lock = new Lock();
     }
 
     function test() public {

@@ -65,6 +65,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      # Forge needs node_modules/
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install modules
+        run: npm install
+
       - name: Install Foundry
         uses: foundry-rs/foundry-toolchain@v1
         with:

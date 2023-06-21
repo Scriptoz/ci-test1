@@ -165,27 +165,30 @@ jobs:
     #   - approve-test-bsc
     environment: test-bsc
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '18'
+      - name: Ecco
+        run: echo "Fucking test"
 
-      - name: Install modules
-        run: npm install
-
-      # - name: Load build artifacts
-      #   uses: actions/download-artifact@v3
+      # - uses: actions/checkout@v3
+      # - uses: actions/setup-node@v3
       #   with:
-      #     name: contract-artifacts
+      #     node-version: '18'
 
-      - name: Deploy
-        run: npm run deploy
-        env:
-          DEPLOY_CONFIG_PATH: environments/test-bsc.yml
-          HARDHAT_NETWORK: bsc
-          MAINNET_PROVIDER_URL: '${{ vars.MAINNET_PROVIDER_URL }}'
-          DEPLOYER_PRIVATE_KEY: '${{ secrets.DEPLOYER_PRIVATE_KEY }}'
-          ETHERSCAN_APIKEY: '${{ secrets.ETHERSCAN_APIKEY }}'
+      # - name: Install modules
+      #   run: npm install
+
+      # # - name: Load build artifacts
+      # #   uses: actions/download-artifact@v3
+      # #   with:
+      # #     name: contract-artifacts
+
+      # - name: Deploy
+      #   run: npm run deploy
+      #   env:
+      #     DEPLOY_CONFIG_PATH: environments/test-bsc.yml
+      #     HARDHAT_NETWORK: bsc
+      #     MAINNET_PROVIDER_URL: '${{ vars.MAINNET_PROVIDER_URL }}'
+      #     DEPLOYER_PRIVATE_KEY: '${{ secrets.DEPLOYER_PRIVATE_KEY }}'
+      #     ETHERSCAN_APIKEY: '${{ secrets.ETHERSCAN_APIKEY }}'
         
 
   deploy-test-polygon:

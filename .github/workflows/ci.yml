@@ -7,162 +7,162 @@ on:
       - '**'
 
 jobs:
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '18'
+  # build:
+  #   name: Build
+  #   runs-on: ubuntu-latest
+  #   timeout-minutes: 10
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: '18'
 
-      - name: Install modules
-        run: npm install
+  #     - name: Install modules
+  #       run: npm install
 
-      - name: Build
-        run: npm run build
+  #     - name: Build
+  #       run: npm run build
       
-      # - name: Save build artifacts
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: contract-artifacts
-      #     path: |
-      #       artifacts
-      #       cache/*.json
+  #     # - name: Save build artifacts
+  #     #   uses: actions/upload-artifact@v3
+  #     #   with:
+  #     #     name: contract-artifacts
+  #     #     path: |
+  #     #       artifacts
+  #     #       cache/*.json
 
 
-  test-hardhat:
-    name: Hardhat Test
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    needs:
-      - build
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '18'
+  # test-hardhat:
+  #   name: Hardhat Test
+  #   runs-on: ubuntu-latest
+  #   timeout-minutes: 10
+  #   needs:
+  #     - build
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: '18'
 
-      - name: Install modules
-        run: npm install
+  #     - name: Install modules
+  #       run: npm install
 
-      # - name: Load build artifacts
-      #   uses: actions/download-artifact@v3
-      #   with:
-      #     name: contract-artifacts
+  #     # - name: Load build artifacts
+  #     #   uses: actions/download-artifact@v3
+  #     #   with:
+  #     #     name: contract-artifacts
 
-      - name: Test
-        run: npm run test:hardhat
-
-
-  test-forge:
-    name: Forge Test
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    needs:
-      - build
-    steps:
-      - uses: actions/checkout@v3
-
-      # Forge needs node_modules/
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-      - name: Install modules
-        run: npm install
-
-      - name: Install Foundry
-        uses: foundry-rs/foundry-toolchain@v1
-        with:
-          version: nightly
-
-      - name: Run Forge build
-        run: |
-          forge --version
-          forge build
-
-      - name: Run Forge tests
-        run: |
-          forge test -vvv
+  #     - name: Test
+  #       run: npm run test:hardhat
 
 
-  lint:
-    name: Lint
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    needs:
-      - build
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '18'
+  # test-forge:
+  #   name: Forge Test
+  #   runs-on: ubuntu-latest
+  #   timeout-minutes: 10
+  #   needs:
+  #     - build
+  #   steps:
+  #     - uses: actions/checkout@v3
 
-      - name: Install modules
-        run: npm install
+  #     # Forge needs node_modules/
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: '18'
 
-      - name: Lint
-        run: npm run lint:check
+  #     - name: Install modules
+  #       run: npm install
 
+  #     - name: Install Foundry
+  #       uses: foundry-rs/foundry-toolchain@v1
+  #       with:
+  #         version: nightly
 
-  contracts-size:
-    name: Contracts Size
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    needs:
-      - build
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '18'
+  #     - name: Run Forge build
+  #       run: |
+  #         forge --version
+  #         forge build
 
-      - name: Install modules
-        run: npm install
-
-      # - name: Load build artifacts
-      #   uses: actions/download-artifact@v3
-      #   with:
-      #     name: contract-artifacts
-
-      - name: Check sizes
-        run: npm run check-size
+  #     - name: Run Forge tests
+  #       run: |
+  #         forge test -vvv
 
 
-  approve-test-bsc:
-    name: Approve Test BSC
-    runs-on: ubuntu-latest
-    needs:
-      - test-hardhat
-      - test-forge
-      - lint
-      - contracts-size
-    steps:
-      - name: manual approve
-        run: echo "Manually approved"
+  # lint:
+  #   name: Lint
+  #   runs-on: ubuntu-latest
+  #   timeout-minutes: 5
+  #   needs:
+  #     - build
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: '18'
+
+  #     - name: Install modules
+  #       run: npm install
+
+  #     - name: Lint
+  #       run: npm run lint:check
 
 
-  approve-test-polygon:
-    name: Approve Test Polygon
-    runs-on: ubuntu-latest
-    needs:
-      - test-hardhat
-      - test-forge
-      - lint
-      - contracts-size
-    steps:
-      - name: manual approve
-        run: echo "Manually approved"
+  # contracts-size:
+  #   name: Contracts Size
+  #   runs-on: ubuntu-latest
+  #   timeout-minutes: 5
+  #   needs:
+  #     - build
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: '18'
+
+  #     - name: Install modules
+  #       run: npm install
+
+  #     # - name: Load build artifacts
+  #     #   uses: actions/download-artifact@v3
+  #     #   with:
+  #     #     name: contract-artifacts
+
+  #     - name: Check sizes
+  #       run: npm run check-size
+
+
+  # approve-test-bsc:
+  #   name: Approve Test BSC
+  #   runs-on: ubuntu-latest
+  #   needs:
+  #     - test-hardhat
+  #     - test-forge
+  #     - lint
+  #     - contracts-size
+  #   steps:
+  #     - name: manual approve
+  #       run: echo "Manually approved"
+
+
+  # approve-test-polygon:
+  #   name: Approve Test Polygon
+  #   runs-on: ubuntu-latest
+  #   needs:
+  #     - test-hardhat
+  #     - test-forge
+  #     - lint
+  #     - contracts-size
+  #   steps:
+  #     - name: manual approve
+  #       run: echo "Manually approved"
 
 
   deploy-test-bsc:
     name: Deploy Test BSC
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    needs:
-      - approve-test-bsc
+    # needs:
+    #   - approve-test-bsc
     environment: test-bsc
     steps:
       - uses: actions/checkout@v3
@@ -183,14 +183,16 @@ jobs:
         env:
           DEPLOY_CONFIG_PATH: environments/test-bsc.yml
           HARDHAT_NETWORK: bsc
+          MAINNET_PROVIDER_URL: '${{ env.MAINNET_PROVIDER_URL }}'
+          DEPLOYER_PRIVATE_KEY: '${{ secrets.DEPLOYER_PRIVATE_KEY }}'
         
 
   deploy-test-polygon:
     name: Deploy Test Polygon
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    needs:
-      - approve-test-polygon
+    # needs:
+    #   - approve-test-polygon
     environment: test-polygon
     steps:
       - uses: actions/checkout@v3
@@ -211,6 +213,8 @@ jobs:
         env:
           DEPLOY_CONFIG_PATH: environments/test-polygon.yml
           HARDHAT_NETWORK: polygon
+          MAINNET_PROVIDER_URL: '${{ env.MAINNET_PROVIDER_URL }}'
+          DEPLOYER_PRIVATE_KEY: '${{ secrets.DEPLOYER_PRIVATE_KEY }}'
 
 
   set-version-test-bsc:

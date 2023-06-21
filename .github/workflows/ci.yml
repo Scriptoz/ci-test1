@@ -173,10 +173,10 @@ jobs:
       - name: Install modules
         run: npm install
 
-      - name: Load build artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: contract-artifacts
+      # - name: Load build artifacts
+      #   uses: actions/download-artifact@v3
+      #   with:
+      #     name: contract-artifacts
 
       - name: Deploy
         run: npm run deploy
@@ -201,10 +201,10 @@ jobs:
       - name: Install modules
         run: npm install
 
-      - name: Load build artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: contract-artifacts
+      # - name: Load build artifacts
+      #   uses: actions/download-artifact@v3
+      #   with:
+      #     name: contract-artifacts
 
       - name: Deploy
         run: npm run deploy

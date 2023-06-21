@@ -51,6 +51,7 @@ export async function deployEnvironment(config: any) {
       contractFactory: contract.factory,
       proxyAddress: contract.address,
       libraries,
+      useUUPS: true,
     });
   }
 

@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import yn from "yn";
+import { ethers } from "hardhat";
 import { deployContract } from "./deploy_utils";
 
 dotenv.config();
@@ -49,7 +50,23 @@ async function main() {
     return;
   }
 
-  const libraries = useLibrary ? [{ name: libraryName, address: libraryAddress }] : [];
+  const libraries = useLibrary ? [{ factory: libraryName, address: libraryAddress }] : [];
+
+  const [ deployer ] = await ethers.getSigners();
+
+  console.log("Deploying contracts with the account:", deployer.address);
+  console.log("Account balance:", (await deployer.getBalance()).toString());
+
+  console.log("Proxy Address:", proxyAddress);
+  console.log("Contract Factory:", contractFactory);
+  console.log("use MultiSig:", useMultiSig);
+  if (useMultiSig) console.log("GnosisSafe Address:", gnosisSafeAddress);
+  if (useMultiSig) console.log("GnosisSafe URL:", gnosisSafeServiceURL);
+  console.log("Use UUPS:", useUUPS);
+  console.log("Libraries:", libraries);
+
+  ////////////////////// Admin must be check this settings before run the script ////////////////////////
+  // await keypress();
 
   return deployContract({
     useMultiSig,

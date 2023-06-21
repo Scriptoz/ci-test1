@@ -1,5 +1,5 @@
-import {ethers, upgrades, network} from "hardhat";
-import {sleep, verify, keypress} from "../utils/helpers";
+import { ethers, upgrades } from "hardhat";
+import { sleep, verify } from "../utils/helpers";
 import {
   multisig,
   secondConfirmTransaction,
@@ -79,20 +79,6 @@ export async function deployContract(data: ContractDeployParams) {
   const { useMultiSig, gnosisSafeAddress = '', gnosisSafeServiceURL = '', proxyAddress, contractFactory, useUUPS, libraries = [] } = data;
 
   const [ deployer ] = await ethers.getSigners();
-
-  console.log("Deploying contracts with the account:", deployer.address);
-  console.log("Account balance:", (await deployer.getBalance()).toString());
-
-  console.log("Proxy Address:", proxyAddress);
-  console.log("Contract Factory:", contractFactory);
-  console.log("use MultiSig:", useMultiSig);
-  if (useMultiSig) console.log("GnosisSafe Address:", gnosisSafeAddress);
-  if (useMultiSig) console.log("GnosisSafe URL:", gnosisSafeServiceURL);
-  console.log("Use UUPS:", useUUPS);
-  console.log("Libraries:", libraries);
-
-  ////////////////////// Admin must be check this settings before run the script ////////////////////////
-  // await keypress();
 
   // Contract factory param
   let factoryParam = {};

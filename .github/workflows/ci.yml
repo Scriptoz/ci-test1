@@ -161,7 +161,7 @@ jobs:
     name: Deploy Test BSC
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    environment: test-bsc1
+    environment: test-bsc
     needs:
       - build
     steps:

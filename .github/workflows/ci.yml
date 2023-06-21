@@ -150,7 +150,7 @@ jobs:
 
 
   deploy-test-bsc:
-    name: Deploy Test
+    name: Deploy Test BSC
     runs-on: ubuntu-latest
     timeout-minutes: 10
     needs:

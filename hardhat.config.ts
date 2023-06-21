@@ -17,17 +17,17 @@ const config: any = {
 
   networks: {
     bsc: {
-      url: process.env.MAINNET_BSC_PROVIDER_URL,
+      url: process.env.MAINNET_BSC_PROVIDER_URL || '',
       chainId: 56,
       gas: 2100000,
-      accounts: [process.env.DEPLOYER_PRIVATE_KEY],
+      accounts: process.env.DEPLOYER_PRIVATE_KEY ? [process.env.DEPLOYER_PRIVATE_KEY] : [],
       addressesSet: "bsc",
     },
     polygon: {
-      url: process.env.MAINNET_POLYGON_PROVIDER_URL,
+      url: process.env.MAINNET_POLYGON_PROVIDER_URL || '',
       chainId: 137,
       gasPrice: Number(process.env.GAS_PRICE_POLYGON),
-      accounts: [process.env.DEPLOYER_PRIVATE_KEY],
+      accounts: process.env.DEPLOYER_PRIVATE_KEY ? [process.env.DEPLOYER_PRIVATE_KEY] : [],
       addressesSet: "polygon",
     },
   },

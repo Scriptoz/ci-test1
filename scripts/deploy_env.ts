@@ -1,6 +1,11 @@
-import { ethers } from 'hardhat';
 import yaml from 'js-yaml';
 import fs from 'fs';
+import dotenv from 'dotenv';
+
+import { deployEnvironment } from './deploy_utils';
+
+// TODO: rm
+dotenv.config();
 
 async function main() {
   const configPath = process.env.DEPLOY_CONFIG_PATH;
@@ -10,7 +15,8 @@ async function main() {
   }
   
   const config = yaml.load(fs.readFileSync(configPath, 'utf8'));
-  console.log('config', config);
+  
+  await deployEnvironment(config);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

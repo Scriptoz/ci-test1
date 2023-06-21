@@ -123,8 +123,8 @@ jobs:
         run: npm run check-size
 
 
-  approve-test:
-    name: Approve Test
+  approve-test-bsc:
+    name: Approve Test BSC
     runs-on: ubuntu-latest
     needs:
       - test-hardhat
@@ -136,8 +136,8 @@ jobs:
         run: echo "Manually approved"
 
 
-  approve-prod:
-    name: Approve Prod
+  approve-test-polygon:
+    name: Approve Test Polygon
     runs-on: ubuntu-latest
     needs:
       - test-hardhat
@@ -149,12 +149,12 @@ jobs:
         run: echo "Manually approved"
 
 
-  deploy-test:
+  deploy-test-bsc:
     name: Deploy Test
     runs-on: ubuntu-latest
     timeout-minutes: 10
     needs:
-      - approve-test
+      - approve-test-bsc
     environment: test
     steps:
       - uses: actions/checkout@v3
@@ -173,38 +173,39 @@ jobs:
       - name: Deploy
         run: npm run deploy
         env:
-          DEPLOY_CONFIG_PATH: environments/test.yml
+          DEPLOY_CONFIG_PATH: environments/test-bsc.yml
+          HARDHAT_NETWORK: bsc
         
 
-  deploy-prod:
-    name: Deploy Prod
+  deploy-test-polygon:
+    name: Deploy Test Polygon
     runs-on: ubuntu-latest
     timeout-minutes: 10
     needs:
-      - approve-prod
+      - approve-test-polygon
     environment: prod
     steps:
       - name: Deploy
         run: echo deploy
 
 
-  set-version-test:
-    name: Set Version Test
+  set-version-test-bsc:
+    name: Set Version Test BSC
     runs-on: ubuntu-latest
     timeout-minutes: 5
     needs:
-      - deploy-test
+      - deploy-test-bsc
     steps:
       - name: SetVersion
         run: echo set version
         
 
-  set-version-prod:
-    name: Set Version Prod
+  set-version-test-polygon:
+    name: Set Version Test Polygon
     runs-on: ubuntu-latest
     timeout-minutes: 5
     needs:
-      - deploy-prod
+      - deploy-test-polygon
     steps:
       - name: SetVersion
         run: echo set version

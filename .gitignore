@@ -9,6 +9,7 @@ typechain-types
 # Hardhat files
 cache
 artifacts
+.openzeppelin/
 
 # Forge compiler files
 forge-cache/

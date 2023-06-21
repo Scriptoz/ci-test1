@@ -183,7 +183,7 @@ jobs:
         env:
           DEPLOY_CONFIG_PATH: environments/test-bsc.yml
           HARDHAT_NETWORK: bsc
-          MAINNET_PROVIDER_URL: '${{ env.MAINNET_PROVIDER_URL }}'
+          MAINNET_PROVIDER_URL: '${{ vars.MAINNET_PROVIDER_URL }}'
           DEPLOYER_PRIVATE_KEY: '${{ secrets.DEPLOYER_PRIVATE_KEY }}'
         
 
@@ -213,7 +213,7 @@ jobs:
         env:
           DEPLOY_CONFIG_PATH: environments/test-polygon.yml
           HARDHAT_NETWORK: polygon
-          MAINNET_PROVIDER_URL: '${{ env.MAINNET_PROVIDER_URL }}'
+          MAINNET_PROVIDER_URL: '${{ vars.MAINNET_PROVIDER_URL }}'
           DEPLOYER_PRIVATE_KEY: '${{ secrets.DEPLOYER_PRIVATE_KEY }}'
 
 

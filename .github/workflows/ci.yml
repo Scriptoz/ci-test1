@@ -155,7 +155,7 @@ jobs:
     timeout-minutes: 10
     needs:
       - approve-test-bsc
-    environment: test
+    environment: test-bsc
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -183,10 +183,26 @@ jobs:
     timeout-minutes: 10
     needs:
       - approve-test-polygon
-    environment: prod
+    environment: test-polygon
     steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install modules
+        run: npm install
+
+      - name: Load build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: contract-artifacts
+
       - name: Deploy
-        run: echo deploy
+        run: npm run deploy
+        env:
+          DEPLOY_CONFIG_PATH: environments/test-polygon.yml
+          HARDHAT_NETWORK: polygon
 
 
   set-version-test-bsc:
